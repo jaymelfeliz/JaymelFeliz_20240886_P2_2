@@ -8,7 +8,7 @@
 
 VIDEO: https://youtu.be/D_AajzrgN5M
 
-> **Nota:** Haz clic en el enlace superior o reproduce el archivo `demo-video.mp4` incluido en la raíz de este repositorio para observar la prueba de conectividad y el establecimiento dinámico de los túneles IPsec.
+> **Nota:** Haz clic en el enlace superior.
 
 ---
 
