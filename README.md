@@ -6,7 +6,7 @@
 
 ## 📹 Video Demostrativo
 
-[![Ver Video Demostrativo](https://img.shields.io/badge/▶%20Ver%20Video%20Demostrativo-Ver%20en%20Loom%20%2F%20YouTube-red?style=for-the-badge&logo=youtube)](demo-video.mp4)
+VIDEO: https://youtu.be/D_AajzrgN5M
 
 > **Nota:** Haz clic en el enlace superior o reproduce el archivo `demo-video.mp4` incluido en la raíz de este repositorio para observar la prueba de conectividad y el establecimiento dinámico de los túneles IPsec.
 
