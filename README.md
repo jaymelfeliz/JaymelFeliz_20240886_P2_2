@@ -28,6 +28,7 @@ El objetivo principal de este laboratorio es implementar y validar un **túnel V
 ## 🌐 Topología de Red
 
 La arquitectura física/lógica interconecta dos sedes a través de un enlace WAN punto a punto en la subred `202.40.88.0/30`.
+MAQUETACION
 
 ```text
        [ LAN SEDE A ]                                                                [ LAN SEDE B ]
@@ -44,6 +45,8 @@ La arquitectura física/lógica interconecta dos sedes a través de un enlace WA
 ```
 
 ---
+LOGICO:
+<img width="538" height="473" alt="image" src="https://github.com/user-attachments/assets/83244ddf-aed8-447a-bff3-175920d6774d" />
 
 ## 📊 Tabla de Direccionamiento
 
@@ -74,40 +77,11 @@ La VPN se basa en el protocolo **IKEv1** dividido en dos fases fundamentales:
 
 ## 🛠️ Configuraciones Implementadas
 
-### 1. FortiGate-A (CLI)
+### 1. FortiGate-A (GUI)
+<img width="1598" height="868" alt="image" src="https://github.com/user-attachments/assets/e659c58c-8313-428d-8d1b-7fb17fe196dc" />
 
-```text
-config vpn ipsec phase1-interface
-    edit "VPN_CISCO"
-        set interface "port2"
-        set ike-version 1
-        set peertype any
-        set net-device disable
-        set proposal des-sha256 des-sha1
-        set dhgrp 14
-        set remote-gw 202.40.88.2
-        set psksecret ClaveSegura2024
-    next
-end
-
-config vpn ipsec phase2-interface
-    edit "VPN_CISCO_p2"
-        set phase1name "VPN_CISCO"
-        set proposal des-sha256 des-sha1
-        set dhgrp 14
-        set src-subnet 192.168.86.0 255.255.255.128
-        set dst-subnet 172.20.24.0 255.255.255.240
-        set auto-negotiate enable
-    next
-end
-
-config router static
-    edit 0
-        set dst 172.20.24.0 255.255.255.240
-        set device "VPN_CISCO"
-    next
-end
-```
+<img width="1610" height="877" alt="image" src="https://github.com/user-attachments/assets/13add52f-f7f2-4ff4-bb1b-190e80516039" />
+<img width="1604" height="276" alt="image" src="https://github.com/user-attachments/assets/f7fcde36-6660-48b3-b838-4869ca7a59d6" />
 
 ### 2. Router Cisco 7200 (CLI)
 
@@ -189,6 +163,7 @@ IPv4 Crypto ISAKMP SA
 dst             src             state          conn-id status
 202.40.88.2     202.40.88.1     QM_IDLE           1001 ACTIVE
 ```
+<img width="666" height="188" alt="image" src="https://github.com/user-attachments/assets/c98c51a9-4706-48c4-b2e5-c9b619e4ba85" />
 
 ### 2. Estado de Fase 2 (IPsec SA) en FortiGate
 ```text
@@ -201,6 +176,7 @@ proxyid=VPN_CISCO proto=0 sa=1 ref=2 serial=1
   dec: spi=1464a1c4 esp=des ah=sha1
   enc: spi=ae208eee esp=des ah=sha1
 ```
+<img width="1119" height="582" alt="image" src="https://github.com/user-attachments/assets/e63622ed-e881-4d37-a8c8-6c3aa8f44f3e" />
 
 ### 3. Prueba ICMP y Traza desde la PC1
 ```text
@@ -212,7 +188,6 @@ trace to 172.20.24.2, 8 hops max, press Ctrl+C to stop
  1   192.168.86.1   12.608 ms  14.907 ms  28.527 ms
  2   172.20.24.2    29.110 ms  26.402 ms  25.881 ms
 ```
-
 ---
 
 ## 🖼 Diagramas y Evidencias
@@ -224,30 +199,9 @@ trace to 172.20.24.2, 8 hops max, press Ctrl+C to stop
 
 ---
 
-## 📂 Archivos y Estructura del Repositorio
-
-```text
-.
-├── README.md                   <- Documentación principal
-├── demo-video.mp4              <- Video demostrativo
-├── configs/
-│   ├── fortigate-A.conf        <- Running configuration completa de FortiGate-A
-│   └── cisco-7200.cfg          <- Running configuration completa de Cisco 7200
-├── scripts/
-│   ├── server-init.sh          <- Script de red del Servidor Linux
-│   └── vpcs-setup.txt          <- Comandos del cliente VPCS
-└── images/
-    ├── topology.png            <- Diagrama de la topología
-    └── vpn-status-gui.png      <- Captura de pantalla del estado del túnel
-```
-
----
-
 ## 📜 Running Configurations
 
-* [📄 Ver Running-Config FortiGate-A](configs/fortigate-A.conf)
-* [📄 Ver Running-Config Cisco 7200](configs/cisco-7200.cfg)
-
+Los RUNNING-CONFIG estan linkeados en el directorio.
 ---
 
 ## 📝 Scripts y Archivos Utilizados
